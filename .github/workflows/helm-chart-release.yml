@@ -24,8 +24,8 @@ jobs:
 
     - name: Configure Git
       run: |
-        git config user.name "$GITHUB_ACTOR"
-        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
     - name: Install Helm
       uses: azure/setup-helm@v4
@@ -41,33 +41,48 @@ jobs:
       run: |
         helm lint superset-custom/
 
+    - name: Get chart version
+      id: chart_version
+      run: |
+        VERSION=$(grep '^version:' superset-custom/Chart.yaml | awk '{print $2}')
+        NAME=$(grep '^name:' superset-custom/Chart.yaml | awk '{print $2}')
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "name=$NAME" >> $GITHUB_OUTPUT
+        echo "tag=${NAME}-${VERSION}" >> $GITHUB_OUTPUT
+
     - name: Package Helm Chart
       run: |
         mkdir -p .cr-release-packages
         helm package superset-custom/ -d .cr-release-packages
 
-    - name: Upload chart packages
-      uses: actions/upload-artifact@v4
-      with:
-        name: helm-charts
-        path: .cr-release-packages
-
-    - name: Run chart-releaser
-      uses: helm/chart-releaser-action@v1.6.0
-      with:
-        charts_dir: .
-        config: cr.yaml
+    - name: Create Release
       env:
-        CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        TAG="${{ steps.chart_version.outputs.tag }}"
+        
+        # Check if release already exists
+        if gh release view "$TAG" >/dev/null 2>&1; then
+          echo "Release $TAG already exists"
+        else
+          # Create release
+          gh release create "$TAG" \
+            .cr-release-packages/*.tgz \
+            --title "$TAG" \
+            --notes "Release of ${{ steps.chart_version.outputs.name }} chart version ${{ steps.chart_version.outputs.version }}"
+        fi
 
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: .cr-release-packages
-        force_orphan: true
-        user_name: github-actions[bot]
-        user_email: 41898282+github-actions[bot]@users.noreply.github.com 
+    - name: Update Helm repo index
+      run: |
+        git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
+        
+        # Copy release packages
+        cp -r .cr-release-packages/* . 2>/dev/null || true
+        
+        # Generate index
+        helm repo index . --url https://github.com/${{ github.repository }}/releases/download/
+        
+        # Commit and push
+        git add .
+        git commit -m "Update Helm repository index" || exit 0
+        git push origin gh-pages 
