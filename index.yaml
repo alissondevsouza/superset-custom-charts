@@ -30,5 +30,5 @@ entries:
     - https://github.com/apache/superset
     urls:
     - https://github.com/alissondevsouza/superset-custom-charts/releases/download/superset-0.15.1/superset-0.15.1.tgz
-    version: 0.15.1
+    version: 0.15.3
 generated: "2025-09-19T21:44:19.405092855-03:00"
