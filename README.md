@@ -63,8 +63,6 @@ redis:
   enabled: true
 ```
 
-## Desenvolvimento
-
 ### Pré-requisitos
 
 - Helm 3.x
