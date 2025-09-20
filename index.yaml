@@ -3,7 +3,7 @@ entries:
   superset:
   - apiVersion: v2
     appVersion: 5.0.0
-    created: "2025-09-20T00:49:03.334746259Z"
+    created: "2025-09-20T00:56:45.495135278Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -15,7 +15,7 @@ entries:
       version: 17.3.7
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
-    digest: d762291beeef49f70c75f66af6bd3e6aaaf6e2471d205a4a6a8bd5ddd44e3ada
+    digest: a6445b2a146bd47327432bbd166269ef2f5af18b5e2146f570fb206fe4fce656
     home: https://superset.apache.org/
     icon: https://artifacthub.io/image/68c1d717-0e97-491f-b046-754e46f46922@2x
     keywords:
@@ -29,11 +29,11 @@ entries:
     sources:
     - https://github.com/apache/superset
     urls:
-    - https://github.com/alissondevsouza/superset-custom-charts/releases/download/superset-0.15.2.tgz
-    version: 0.15.2
+    - https://github.com/alissondevsouza/superset-custom-charts/releases/download/superset-0.15.3/superset-0.15.3.tgz
+    version: 0.15.3
   - apiVersion: v2
     appVersion: 5.0.0
-    created: "2025-09-20T00:49:03.354722121Z"
+    created: "2025-09-20T00:56:45.504248711Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -45,7 +45,7 @@ entries:
       version: 17.3.7
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
-    digest: d762291beeef49f70c75f66af6bd3e6aaaf6e2471d205a4a6a8bd5ddd44e3ada
+    digest: a6445b2a146bd47327432bbd166269ef2f5af18b5e2146f570fb206fe4fce656
     home: https://superset.apache.org/
     icon: https://artifacthub.io/image/68c1d717-0e97-491f-b046-754e46f46922@2x
     keywords:
@@ -59,66 +59,6 @@ entries:
     sources:
     - https://github.com/apache/superset
     urls:
-    - https://github.com/alissondevsouza/superset-custom-charts/releases/download/.cr-release-packages/superset-0.15.2.tgz
-    version: 0.15.2
-  - apiVersion: v2
-    appVersion: 5.0.0
-    created: "2025-09-20T00:49:03.325549432Z"
-    dependencies:
-    - condition: postgresql.enabled
-      name: postgresql
-      repository: https://charts.bitnami.com/bitnami
-      version: 12.1.15
-    - condition: redis.enabled
-      name: redis
-      repository: https://charts.bitnami.com/bitnami
-      version: 17.3.7
-    description: Apache Superset is a modern, enterprise-ready business intelligence
-      web application
-    digest: 93f9e44cd9e47c36a8f96ce2deafa8278d05d6b2e63cc3e1768dde4d14ecadce
-    home: https://superset.apache.org/
-    icon: https://artifacthub.io/image/68c1d717-0e97-491f-b046-754e46f46922@2x
-    keywords:
-    - business intelligence
-    - data science
-    maintainers:
-    - email: craig@craigrueda.com
-      name: craig-rueda
-      url: https://github.com/craig-rueda
-    name: superset
-    sources:
-    - https://github.com/apache/superset
-    urls:
-    - https://github.com/alissondevsouza/superset-custom-charts/releases/download/superset-0.15.1.tgz
-    version: 0.15.1
-  - apiVersion: v2
-    appVersion: 5.0.0
-    created: "2025-09-20T00:49:03.344573497Z"
-    dependencies:
-    - condition: postgresql.enabled
-      name: postgresql
-      repository: https://charts.bitnami.com/bitnami
-      version: 12.1.15
-    - condition: redis.enabled
-      name: redis
-      repository: https://charts.bitnami.com/bitnami
-      version: 17.3.7
-    description: Apache Superset is a modern, enterprise-ready business intelligence
-      web application
-    digest: 93f9e44cd9e47c36a8f96ce2deafa8278d05d6b2e63cc3e1768dde4d14ecadce
-    home: https://superset.apache.org/
-    icon: https://artifacthub.io/image/68c1d717-0e97-491f-b046-754e46f46922@2x
-    keywords:
-    - business intelligence
-    - data science
-    maintainers:
-    - email: craig@craigrueda.com
-      name: craig-rueda
-      url: https://github.com/craig-rueda
-    name: superset
-    sources:
-    - https://github.com/apache/superset
-    urls:
-    - https://github.com/alissondevsouza/superset-custom-charts/releases/download/.cr-release-packages/superset-0.15.1.tgz
-    version: 0.15.1
-generated: "2025-09-20T00:49:03.316178768Z"
+    - https://github.com/alissondevsouza/superset-custom-charts/releases/download/superset-0.15.3/.cr-release-packages/superset-0.15.3.tgz
+    version: 0.15.3
+generated: "2025-09-20T00:56:45.485454206Z"
