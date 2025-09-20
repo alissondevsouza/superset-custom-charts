@@ -74,15 +74,21 @@ jobs:
 
     - name: Update Helm repo index
       run: |
+        # Switch to or create gh-pages branch
+        git fetch origin gh-pages 2>/dev/null || true
         git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
         
-        # Copy release packages
+        # Clean the branch (keep only index.yaml and chart packages)
+        git rm -rf . 2>/dev/null || true
+        
+        # Copy chart packages
         cp -r .cr-release-packages/* . 2>/dev/null || true
         
-        # Generate index
-        helm repo index . --url https://github.com/${{ github.repository }}/releases/download/
+        # Generate index with correct URL structure
+        TAG="${{ steps.chart_version.outputs.tag }}"
+        helm repo index . --url "https://github.com/${{ github.repository }}/releases/download/${TAG}/"
         
         # Commit and push
         git add .
-        git commit -m "Update Helm repository index" || exit 0
+        git commit -m "Update Helm repository index for ${TAG}" || exit 0
         git push origin gh-pages 
